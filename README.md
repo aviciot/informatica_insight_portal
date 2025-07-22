@@ -21,6 +21,9 @@ This reduces the load on production Informatica environments and allows the port
 
 > This portal is useful for developers, analysts, and admins looking to trace process dependencies, identify issues, and gain operational insights into Informatica workflows.
 
+📘 **Documentation** available at:  
+👉 [https://aviciot.github.io/informatica_insight_portal/](https://aviciot.github.io/informatica_insight_portal/)
+
 ---
 
 ## 🔑 Key Features
@@ -104,6 +107,9 @@ Explore the key features of the **Informatica Insights Portal** through the foll
 ---
 
 ## 📊 Informatica Insights & Workflow Explorer
+
+### Home Page
+![alt text](image-1.png)
 
 Full visibility into Informatica components: workflows, sessions, connections, and command tasks.
 

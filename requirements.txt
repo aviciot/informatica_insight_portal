@@ -161,3 +161,4 @@ xyzservices
 zipp
 oracledb
 scikit-learn
+mkdocs

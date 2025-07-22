@@ -1,0 +1,10 @@
+site_name: WIP Informatica Insight Portal
+repo_url: https://github.com/aviciot/informatica_insight_portal
+theme:
+  name: readthedocs
+
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - Usage: usage.md
+  - Performance: performance.md

@@ -210,7 +210,7 @@ with st.sidebar:
                 st.rerun()
 
         # Common Sidebar Elements
-    st.image("./config/Shift4Logo.png", use_container_width=True)
+    st.image("./config/logo.png", use_container_width=True)
     st.title("DS Dashboard")
     st.markdown("---")
     # Navigation Buttons

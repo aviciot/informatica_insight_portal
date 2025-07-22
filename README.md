@@ -160,6 +160,18 @@ With the workflow in context - Session Stats
 Zoom in on specific run date and see all sessions run information as date, duration error and erros message 
 <img width="815" height="418" alt="image" src="https://github.com/user-attachments/assets/bbcae800-9601-4e21-b720-0bae2870b372" />
 
+## 📈 ML based Analysis ...(wip)
+
+Workflow trends 
+<img width="1811" height="843" alt="image" src="https://github.com/user-attachments/assets/e251ce7e-468f-4458-954d-430c6e560f93" />
+
+Daily & Hourly Trends
+<img width="1824" height="879" alt="image" src="https://github.com/user-attachments/assets/1bc154a1-384f-490c-98d9-a64ac053233c" />
+
+HeatMap
+For the selected workflow, see how average runtime varies by day and hour 
+<img width="1457" height="607" alt="image" src="https://github.com/user-attachments/assets/29ec4ffe-526f-4fe6-99c0-bb10d76f62a9" />
+
 Anomalous Insights for Workflow in context 
 <img width="884" height="302" alt="image" src="https://github.com/user-attachments/assets/c55de179-f197-4922-a03c-9b4203ee55c4" />
 
@@ -205,17 +217,7 @@ Explore the structure of the internal SQLite/PostgreSQL Insight DB.
 <img width="1063" height="867" alt="Insight DB Tables" src="https://github.com/user-attachments/assets/ec17b193-2d2c-40ae-ba0d-be782a77290f" />
 
 ---
-## 📈 ML based Analysis ...(wip)
 
-Workflow trends 
-<img width="1811" height="843" alt="image" src="https://github.com/user-attachments/assets/e251ce7e-468f-4458-954d-430c6e560f93" />
-
-Daily & Hourly Trends
-<img width="1824" height="879" alt="image" src="https://github.com/user-attachments/assets/1bc154a1-384f-490c-98d9-a64ac053233c" />
-
-HeatMap
-For the selected workflow, see how average runtime varies by day and hour 
-<img width="1457" height="607" alt="image" src="https://github.com/user-attachments/assets/29ec4ffe-526f-4fe6-99c0-bb10d76f62a9" />
 
 
 ## 📬 Contact

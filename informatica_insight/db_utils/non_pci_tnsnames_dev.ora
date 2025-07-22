@@ -1,0 +1,123 @@
+STGPROD_ORIG =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVICE_NAME = stgprod.prd.credorax.com)
+    (SID = stgprod)
+    )
+  )
+STGPROD =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVICE_NAME = stg_prm.prd.credorax.com)
+    )
+  )
+STGARCH =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = stgarch)
+    )
+  )
+STGSTBY =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb03.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVICE_NAME = stgstby.prd.credorax.com)
+    (SID = stgstby)
+    )
+  )
+
+DWHPROD =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = stgprod.prd.credorax.com)
+    )
+  )
+
+#dwhprod_new =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = bidb02-old.prod.bos.credorax.com)(PORT = 1521)))(CONNECT_DATA =(SID = STGPROD)))
+
+DWHSTBY =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb03.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = stgstby.prd.credorax.com)
+    (SID = stgstby)
+    )
+  )
+INFOPROD =
+   (DESCRIPTION=
+    (ADDRESS=(PROTOCOL=TCP) (HOST= bidb02.prod.bos.credorax.com) (PORT=1521))
+          (CONNECT_DATA=
+        (SERVICE_NAME=info_prm.prd.credorax.com)
+       )
+)
+INFOSTBY =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb03.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = infostby.prd.credorax.com)
+    (SID = infostby)
+    )
+  )
+OSB =
+  (DESCRIPTION=
+    (ADDRESS=
+    (PROTOCOL=TCP)(PORT=1521)(HOST=ncore04.prod.fra.credorax.com)
+    )
+    (CONNECT_DATA=(SID=OSB)
+    )
+  )
+
+
+EXTPROC_CONNECTION_DATA =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1))
+    (CONNECT_DATA =
+    (SID = PLSExtProc)
+    (PRESENTATION = RO)
+    )
+  )
+
+
+biprod_high = (description= (address=(protocol=tcps)(port=1522)(host=adb.us-ashburn-1.oraclecloud.com))(connect_data=(service_name=ixdhqyeeoyzw1nf_biprod_high.adwc.oraclecloud.com))(security=(ssl_server_cert_dn=
+        "CN=adwc.uscom-east-1.oraclecloud.com,OU=Oracle BMCS US,O=Oracle Corporation,L=Redwood City,ST=California,C=US"))   )
+
+biprod_low = (description= (address=(protocol=tcps)(port=1522)(host=adb.us-ashburn-1.oraclecloud.com))(connect_data=(service_name=ixdhqyeeoyzw1nf_biprod_low.adwc.oraclecloud.com))(security=(ssl_server_cert_dn=
+        "CN=adwc.uscom-east-1.oraclecloud.com,OU=Oracle BMCS US,O=Oracle Corporation,L=Redwood City,ST=California,C=US"))   )
+
+biprod_medium = (description= (address=(protocol=tcps)(port=1522)(host=adb.us-ashburn-1.oraclecloud.com))(connect_data=(service_name=ixdhqyeeoyzw1nf_biprod_medium.adwc.oraclecloud.com))(security=(ssl_server_cert_dn=
+        "CN=adwc.uscom-east-1.oraclecloud.com,OU=Oracle BMCS US,O=Oracle Corporation,L=Redwood City,ST=California,C=US"))   )
+
+STGQA =
+(DESCRIPTION =
+(ADDRESS = (PROTOCOL = TCP)(HOST = bidb-np-01.qa.bos.credorax.com)(PORT = 1521))
+(CONNECT_DATA = (UR=A)
+(SERVER = DEDICATED)
+(SERVICE_NAME = stgqa)
+)
+)
+
+STGDEVB =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stg-np-01.dev.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+
+
+STGDEVA =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 10.55.121.222)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVICE_NAME = STGDEV)
+    )
+)

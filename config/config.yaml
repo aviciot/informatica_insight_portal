@@ -1,0 +1,45 @@
+dev_mode: true
+
+
+dashboard_db:
+  work_with: sqlite
+  sqlite:
+    db_path: db/dashboard.sqlite
+
+  postgres:
+    dbname: ds_dashboard
+    user: info_connect
+    password: Padov80
+    host: dwh02.dev1.bos.credorax.com
+    port: 5432
+
+
+role_permissions:
+  admin:
+  - all
+  dev:
+  - development_tools
+  - informatica_insight
+  qa:
+  - informatica_insight
+  user:
+  - view_dashboard
+
+users:
+  admin:
+    password: $2b$12$HKDwYjNYfbVdXdCWvffPl.A5QxEC4T67pRL3MQYJBv78jqm6EyNOW
+    role: admin
+  qauser:
+    password: $2b$12$HKDwYjNYfbVdXdCWvffPl.A5QxEC4T67pRL3MQYJBv78jqm6EyNOW
+    role: qa
+  user:
+    password: $2b$12$HKDwYjNYfbVdXdCWvffPl.A5QxEC4T67pRL3MQYJBv78jqm6EyNOW
+    role: user
+
+# crontab_manager:
+#   config_path: crontab_manager_page/config
+#   config_file_name: crontab_manager_config.yaml
+
+# cleanup_tool:
+#   config_path: cleanup_tool_page/config
+#   config_file_name: crontab_manager_config.yaml

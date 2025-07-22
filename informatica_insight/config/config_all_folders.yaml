@@ -1,0 +1,402 @@
+cleanup_tool:
+  config_file_name: crontab_manager_config.yaml
+  config_path: cleanup_tool_page/config
+crontab_manager:
+  config_file_name: crontab_manager_config.yaml
+  config_path: crontab_manager_page/config
+
+
+insight_db:
+  work_with: sqlite
+  sqlite:
+    db_path: informatica_insight/data/ds_viewer.sqlite
+
+  postgres:
+    dbname: informatica_insight
+    user: info_connect
+    password: Padov80
+    host: dwh02.dev1.bos.credorax.com
+    port: 5432
+
+  ddl:
+    informatica_connections_details:
+      fetch_data_queries:
+        get_all_connection_details: |
+          SELECT b.CNX_SUBTYPE_NAME AS connection_type,
+            a.object_name AS connection_name,
+            a.user_name,
+            a.Connect_String AS connection_string,
+            '' AS database_name,
+            '' AS host_name,
+            '' AS port_number,
+            '' AS service_name,
+            SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+            SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS created_date,
+            '' AS updated_date
+          FROM OPB_CNX a
+          INNER JOIN OPB_MMD_CNX b 
+              ON a.OBJECT_TYPE = b.CNX_OBJECT_TYPE  
+              AND a.OBJECT_SUBTYPE = b.CNX_OBJECT_SUBTYPE
+          ORDER BY a.object_name
+
+    informatica_hierarchy_structure:
+      drop_and_create: true
+      drop_create: db_utils/create_informatica_hierarchy_structure.sql
+      insert: db_utils/insert_informatica_hierarchy_structure.sql
+      fetch_data_queries:
+        get_proccess_as_tree: |
+          SELECT base_query.folder_name, 
+            REGEXP_SUBSTR(base_query.hierarchy_structure, '[^/]+$', 1, 1) AS session_wf_name,
+            REGEXP_SUBSTR(base_query.path, '[0-9]+', 1, 1) AS workflow_id,
+            CASE
+              WHEN INSTR(base_query.path, '/', -1) = 1 THEN NULL
+              ELSE REGEXP_SUBSTR(base_query.path, '[0-9]+', 1, REGEXP_COUNT(base_query.path, '/') - 1)
+            END AS session_id,
+            base_query.hierarchy_structure,
+            base_query.path,
+            base_query.instance_id,
+            SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+            SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS created_date
+          FROM (
+            SELECT DISTINCT 
+              '/' || task.task_id AS path,
+              task.task_name AS hierarchy_structure,
+              subject.subj_name AS folder_name,
+              NULL AS instance_id
+            FROM opb_task task
+            JOIN opb_subject subject ON task.subject_id = subject.subj_id
+            WHERE task.task_type = 71 
+            UNION ALL 
+            SELECT DISTINCT 
+              hierarchy.path,
+              hierarchy.task_name AS hierarchy_structure,
+              subject.subj_name AS folder_name,
+              hierarchy.instance_id
+            FROM (
+              SELECT 
+                task_inst.workflow_id,
+                task_inst.task_id,
+                task_inst.instance_id,
+                LEVEL AS depth,
+                SYS_CONNECT_BY_PATH(task_inst.workflow_id, '/') || '/' || task_inst.task_id || '/' AS path,
+                LPAD(' ', 4 * LEVEL, ' ') || SYS_CONNECT_BY_PATH(task_inst.instance_name, '/') AS task_name
+              FROM opb_task_inst task_inst
+              WHERE task_inst.task_type IN (68, 70)
+              START WITH workflow_id IN (
+                SELECT task_id FROM opb_task WHERE task_type = 71
+              ) 
+              CONNECT BY PRIOR task_inst.task_id = task_inst.workflow_id
+            ) hierarchy
+            JOIN opb_task task ON task.task_id = SUBSTR(hierarchy.path, 2, INSTR(hierarchy.path, '/', 1, 2) - 2)
+            JOIN opb_subject subject ON task.subject_id = subject.subj_id
+          ) base_query
+          ORDER BY 
+            folder_name,
+            base_query.path ASC
+    informatica_sessions_connections:
+      fetch_data_queries:
+        get_script_and_command_details: |
+          SELECT
+            F.SUBJECT_AREA AS FOLDER_NAME,
+            W.TASK_NAME AS WORKFLOW_NAME,
+            T.RU_PARENT_ID AS WORKFLOW_ID,
+            A.TASK_NAME AS SESSION_NAME,
+            '' AS CONNECTION_TYPE,
+            '' AS CONNECTION_NAME,
+            '' AS DIR_NAME,
+            '' AS FILE_NAME,
+            CMD.VAL_NAME AS CMD_TASK_NAME,
+            CONVERT(CMD.PM_VALUE, 'AL32UTF8','WE8ISO8859P1') AS CMD_NAME,
+            CASE
+              WHEN CMD.PM_VALUE LIKE '%.sh%' THEN 'sh'
+              WHEN CMD.PM_VALUE LIKE '%.py%' THEN 'python'
+              ELSE NULL
+            END AS SCRIPT_TYPE,
+            SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+            SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_DATE
+          FROM OPB_TASK T
+          LEFT OUTER JOIN OPB_TASK_VAL_LIST CMD
+            ON T.TASK_ID = CMD.TASK_ID
+          LEFT OUTER JOIN REP_ALL_TASKS A
+            ON A.TASK_ID = T.TASK_ID,
+          OPB_TASK W,
+          REP_SUBJECT F
+          WHERE T.SUBJECT_ID = F.SUBJECT_ID
+            AND T.RU_PARENT_ID = W.TASK_ID
+            AND CMD.VAL_NAME IS NOT NULL
+          ORDER BY F.SUBJECT_AREA, W.TASK_NAME, T.RU_PARENT_ID, A.TASK_NAME, CMD.VAL_NAME
+        get_all_sessions_details: |
+            select SUBJECT_AREA as FOLDER_NAME,
+            WORKFLOW_ID as WORKFLOW_ID,
+            SESSION_INSTANCE_NAME as SESSION_NAME,
+            ''  as CONNECTION_TYPE,
+            CONNECTION_NAME as CONNECTION_NAME,
+            '' as DIR_NAME,
+            ''  as FILE_NAME ,
+            '' as CMD_TASK_NAME,
+            '' as CMD_NAME,
+            '' as SCRIPT_TYPE,
+             SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+             SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+             TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS created_date ,
+             '' as UPDATED_DATE
+              from REP_SESSION_INSTANCES  order by SUBJECT_AREA,WORKFLOW_ID
+
+    informatica_related_tables:
+      fetch_data_queries:
+        get_related_tables: |
+          SELECT DISTINCT
+              rls.SUBJECT_AREA AS FOLDER_NAME,
+              rtr.workflow_name,
+              rtr.instance_name AS SESSION_NAME,
+              rls.MAPPING_NAME,
+              rtm.source_name,
+              rtm.target_name,
+              rtr.WORKFLOW_ID,
+              NULL AS attr_value,
+              SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+              SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+              TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS created_date,
+              '' AS updated_date
+          FROM rep_load_sessions rls
+          JOIN rep_task_inst_run rtr ON rls.session_id = rtr.task_id
+          JOIN rep_tbl_mapping rtm ON rls.mapping_name = rtm.mapping_name    
+          UNION ALL
+          SELECT DISTINCT
+              rls.SUBJECT_AREA AS FOLDER_NAME,
+              rtr.workflow_name,
+              rtr.instance_name AS SESSION_NAME,
+              rls.MAPPING_NAME,              
+              NULL AS source_name,
+              NULL AS target_name,
+              rtr.WORKFLOW_ID,
+              rwa.attr_value,
+              SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+              SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+              TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS created_date,
+              '' AS updated_date
+          FROM rep_load_sessions rls
+          JOIN rep_task_inst_run rtr ON rls.session_id = rtr.task_id
+          JOIN rep_tbl_mapping rtm ON rls.mapping_name = rtm.mapping_name
+          JOIN rep_widget_inst rwi ON rtm.mapping_id = rwi.mapping_id
+          JOIN rep_widget_attr rwa ON rwi.widget_id = rwa.widget_id
+
+    workflow_run_statistics:
+      fetch_data_queries:
+        get_workflow_run_statistics: |
+          SELECT 
+            workflow_name,
+            workflow_id,
+            workflow_run_id,
+            TO_CHAR(START_TIME, 'YYYY-MM-DD HH24:MI:SS') AS START_TIME,
+            TO_CHAR(END_TIME, 'YYYY-MM-DD HH24:MI:SS') AS END_TIME,
+            (END_TIME - START_TIME) * 24 * 60 AS TIME_IN_MIN,
+            TO_CHAR(START_TIME, 'Day') AS DAY_OF_WEEK,
+            SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+            SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS created_date
+          FROM OPB_WFLOW_RUN
+          WHERE START_TIME >= sysdate - 30
+
+
+    session_run_statistics:
+      fetch_data_queries:
+        get_session_run_statistics: |
+          SELECT
+            SUBJECT_AREA,
+            workflow_name,
+            WORKFLOW_ID,
+            WORKFLOW_RUN_ID,
+            INSTANCE_NAME AS SESSION_NAME,
+            TASK_TYPE_NAME,
+            RUN_ERR_CODE,
+            RUN_ERR_MSG,
+            TO_CHAR(START_TIME, 'YYYY-MM-DD HH24:MI:SS') AS START_TIME,
+            TO_CHAR(END_TIME, 'YYYY-MM-DD HH24:MI:SS') AS END_TIME,
+            (END_TIME - START_TIME) * 24 * 60 AS TIME_IN_MIN,
+            SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+            SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+            TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS created_date
+          FROM REP_TASK_INST_RUN
+          WHERE START_TIME >= SYSDATE - 30
+      
+
+
+  views:
+    v_workflows_root:
+      drop: DROP VIEW IF EXISTS v_workflows_root
+      create: |
+        CREATE VIEW v_workflows_root AS  
+        SELECT DISTINCT 
+            FOLDER_NAME, WORKFLOW_ID, SESSION_WF_NAME, "path", INFORMATICA_SERVER, INFORMATICA_USER 
+        FROM INFORMATICA_HIERARCHY_STRUCTURE 
+        WHERE WORKFLOW_ID IS NOT NULL AND SESSION_ID IS NULL
+
+    v_session_with_connections_details:
+        drop: DROP VIEW IF EXISTS v_session_with_connections_details
+        create: |
+          CREATE VIEW v_session_with_connections_details AS
+          SELECT
+              S.FOLDER_NAME,
+              S.WORKFLOW_NAME,
+              S.WORKFLOW_ID,
+              S.SESSION_NAME,
+              S.CMD_TASK_NAME,
+              S.CMD_NAME,
+              S.SCRIPT_TYPE,
+              C.CONNECTION_NAME,
+              C.CONNECTION_TYPE,
+              C.CONNECTION_STRING,
+              C.DATABASE_NAME,
+              C.HOST_NAME,
+              C.PORT_NUMBER,
+              C.SERVICE_NAME,
+              S.INFORMATICA_SERVER,
+              S.INFORMATICA_USER,
+              CASE
+                  WHEN C.CONNECTION_NAME IS NULL THEN 1
+                  ELSE 0
+              END AS MISSING_CONNECTION
+          FROM INFORMATICA_SESSIONS_CONNECTIONS S
+          LEFT JOIN INFORMATICA_CONNECTIONS_DETAILS C
+          ON C.INFORMATICA_SERVER = S.INFORMATICA_SERVER
+          AND C.INFORMATICA_USER = S.INFORMATICA_USER
+          AND C.CONNECTION_NAME = S.CONNECTION_NAME
+
+    v_wf_hierarchy_explorer:
+        drop: DROP VIEW IF EXISTS v_wf_hierarchy_explorer
+        create: |
+          CREATE VIEW v_wf_hierarchy_explorer AS
+          SELECT DISTINCT
+              H.INFORMATICA_USER,
+              H.FOLDER_NAME,
+              H."path",
+              H.HIERARCHY_STRUCTURE,
+              H.WORKFLOW_ID,
+              S.SESSION_NAME,
+              S.CMD_TASK_NAME,
+              S.CMD_NAME,
+              S.SCRIPT_TYPE,
+              C.CONNECTION_NAME,
+              C.CONNECTION_TYPE,
+              C.HOST_NAME,
+              C.DATABASE_NAME,
+              C.PORT_NUMBER,
+              C.SERVICE_NAME,
+              CASE
+                  WHEN C.CONNECTION_NAME IS NULL THEN 1
+                  ELSE 0
+              END AS MISSING_CONNECTION
+          FROM INFORMATICA_HIERARCHY_STRUCTURE H
+          LEFT JOIN INFORMATICA_SESSIONS_CONNECTIONS S
+          ON H.SESSION_WF_NAME = S.SESSION_NAME  
+          AND H.FOLDER_NAME = S.FOLDER_NAME
+          AND H.INFORMATICA_USER = S.INFORMATICA_USER
+          LEFT JOIN INFORMATICA_CONNECTIONS_DETAILS C
+          ON C.INFORMATICA_SERVER = S.INFORMATICA_SERVER
+          AND C.INFORMATICA_USER = S.INFORMATICA_USER
+          AND C.CONNECTION_NAME = S.CONNECTION_NAME
+          ORDER BY
+              H.INFORMATICA_USER,
+              H.FOLDER_NAME,
+            H.HIERARCHY_STRUCTURE DESC
+
+  cache_tables:
+    - v_wf_hierarchy_explorer
+    - v_workflows_root
+    - v_session_with_connections_details
+    - informatica_connections_details
+    - informatica_related_tables
+    - session_run_statistics
+    - workflow_run_statistics
+
+informatica_db:
+
+  non_pci:
+    user: infoprod_rep_nonpci
+    password: infoprod_rep_nonpci99
+    host: bidb02.prod.bos.credorax.com
+    port: 1521
+    service_name: infoprod.prd.credorax.com
+
+  pci:
+    user: infoprod_rep_pci
+    password: infoprod_rep_pci99
+    host: bidb02.prod.bos.credorax.com
+    port: 1521
+    service_name: infoprod.prd.credorax.com
+
+
+  #non_pci:
+   # user: infra_rep_ds_dev01
+    #password: infra_rep_ds_dev0199
+    #host: infodb-01.dev.bos.credorax.com
+    #port: 1521
+    #service_name: INFODEV
+ # pci:
+  #  user: infra_rep_ds_dev01
+   # password: infra_rep_ds_dev0199
+   # host: infodb-01.dev.bos.credorax.com
+   # port: 1521
+    #service_name: INFODEV
+
+db_details:
+  db_path: informatica_insight/data/ds_viewer.sqlite
+  non_pci:
+    user: INFO_REP_PROD
+  pci:
+    user: INFOPROD_REP_PCI
+
+
+files:
+  connections_csv: data/connections.csv
+  informatica_processes: data/informatica_processes.csv
+  non_pci_odbc_ini:
+    align_informatica_connections_details: true
+    path: informatica_insight/db_utils/dev_rhel_odbc.ini
+  non_pci_tnsnames:
+    align_informatica_connections_details: true
+    path: informatica_insight/db_utils/dev_tnsnames.ora
+  pci_odbc_ini:
+    align_informatica_connections_details: true
+    path: informatica_insight/db_utils/dev_rhel_odbc.ini
+  pci_tnsnames:
+    align_informatica_connections_details: true
+    path: informatica_insight/db_utils/dev_tnsnames.ora
+neo4j:
+  password: neo4j
+  port: 7687
+  uri: bolt://localhost:7687
+  user: neo4j
+  test: save
+prod_env_scope:
+- pci
+- non_pci
+role_permissions:
+  admin:
+  - all
+  dev:
+  - development_tools
+  - informatica_insight
+  qa:
+  - informatica_insight
+  user:
+  - view_dashboard
+users:
+  admin:
+    password: $2b$12$HKDwYjNYfbVdXdCWvffPl.A5QxEC4T67pRL3MQYJBv78jqm6EyNOW
+    role: admin
+  qauser:
+    password: $2b$12$HKDwYjNYfbVdXdCWvffPl.A5QxEC4T67pRL3MQYJBv78jqm6EyNOW
+    role: qa
+  user:
+    password: $2b$12$HKDwYjNYfbVdXdCWvffPl.A5QxEC4T67pRL3MQYJBv78jqm6EyNOW
+    role: user
+views:
+  all:
+    drop_create: informatica_insight/db_utils/create_views.sql
+  v_workflows_root:
+    drop_create: informatica_insight/db_utils/create_view_v_workflows_root.sql

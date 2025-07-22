@@ -1,0 +1,699 @@
+###################################################################################
+################################### BI PROD #######################################
+###################################################################################
+
+
+
+
+WAY4_DOCKER4 =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(host=docker-lin02.dev1.bos.credorax.com)(port=15204))
+      (CONNECT_DATA =
+         (sid=orclpdb1)
+      )
+    )
+
+
+WAY4_DOCKER10 =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(host=docker-lin02.dev1.bos.credorax.com)(port=15210))
+      (CONNECT_DATA =
+         (sid=orclpdb1)
+      )
+    )
+
+
+
+WAY4_DOCKER1 =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(host=docker-lin01.dev1.bos.credorax.com)(port=15201))
+      (CONNECT_DATA =
+         (sid=orclpdb1)
+      )
+    )
+
+
+WAY4_DOCKER7 =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(host=docker-lin02.dev1.bos.credorax.com)(port=15207))
+      (CONNECT_DATA =
+         (sid=orclpdb1)
+      )
+    )
+
+
+billing2_qa_hotfix =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-01.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+
+billing2_dev_hotfix =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-02.dev.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+
+billing2_qa_master =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-02.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+
+billing2_transformer_qa =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-03.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+
+billing2_transformer_reg =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-04.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+
+STGQA =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb-np-01.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA = (UR=A)
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = stgqa)
+    )
+  )
+
+infodev-new =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = infodb-01.dev.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = infodev)
+    )
+  )
+
+STGPROD =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = STGPROD)
+    )
+  )
+
+INFOPROD =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = infoprod.prd.credorax.com)
+    )
+  )
+
+INFOSTBY =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb03.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = infostby.prd.credorax.com)
+    )
+  )
+
+###################################################################################
+################################# WAY4 PROD #######################################
+###################################################################################
+
+w4bo1bos =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST =dbbo01.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo1bos.prd.credorax.com)
+    )
+  )
+
+w4on1bos =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST =dbon01.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4on1bos.prd.credorax.com)
+    )
+  )
+
+w4on1fra =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST =dbon01.prod.fra.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4on1fra.prd.credorax.com)
+    )
+  )
+
+w4bo2stb=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST =dbbo02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo2stb.prd.credorax.com)
+    )
+  )
+
+###################################################################################
+################################### BI QA #########################################
+###################################################################################
+
+STGQA1=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST =bidb01.qa1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+          (SID = STGQA1))
+    )
+STGQA2=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST =bidb01.qa1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+          (SID = STGQA2))
+    )
+
+DWHQA1=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST =bidb01.qa1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+          (SID = DWHQA1))
+    )
+ODSQA1=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST =bidb01.qa1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+          (SID = ODSQA1))
+    )
+
+STGQA_NEW =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb-np-01.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA = (UR=A)
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = stgqa)
+    )
+  )
+
+###################################################################################
+################################## BI DEV #########################################
+###################################################################################
+
+
+INFODEV =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = infodb-01.dev.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SID = infodev)
+    )
+  )
+
+
+STGDEV2 =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb01.dev1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = stgdev2)
+    )
+  )
+
+STGDEVA =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stg-np-03.dev.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+
+
+
+STGDEVC =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stg-np-02.dev.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+
+
+
+
+STGDEVB =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stg-np-01.dev.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = stgdev)
+    )
+  )
+###################################################################################
+################################## WAY4 QA ########################################
+###################################################################################
+
+w4bo1qa, w4bo1qa.qa.bos.credorax.com =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = dbbo01.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo1qa.qa.bos.credorax.com)
+      (UR = A)
+    )
+  )
+w4on1qa, w4on1qa.qa.bos.credorax.com =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = dbon01.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4on1qa.qa.bos.credorax.com)
+      (UR = A)
+    )
+  )
+w4on2qa, w4on2qa.qa.bos.credorax.com =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = dbon02.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4on2qa.qa.bos.credorax.com)
+      (UR = A)
+    )
+  )
+
+w4bo2qa, w4bo2qa.qa.bos.credorax.com =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = dbbo02.qa.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo2qa.qa.bos.credorax.com)
+      (UR = A)
+    )
+  )
+
+###################################################################################
+################################# WAY4 INT ########################################
+###################################################################################
+
+w4bo1bos=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbbo01.int.fra.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bostg.int.fra.credorax.com)
+    )
+  )
+
+###################################################################################
+##############################$## WAY4 DEV1 #######################################
+###################################################################################
+
+w4bo1dev1 =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbbo01.dev1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo1bos.prd.credorax.com)
+    )
+  )
+
+w4bo1dev1stb =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbbo02.dev1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo1stb.prd.credorax.com)
+      (UR=A)
+    )
+  )
+
+w4on1dev1 =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbon01.dev1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4on1fra.prd.credorax.com)
+    )
+  )
+
+w4on2dev1 =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbon02.dev1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4on1bos.prd.credorax.com)
+    )
+  )
+
+###################################################################################
+##############################$## WAY4 DEV2 #######################################
+###################################################################################
+
+w4bodev2 =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbbo01.dev2.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo1bos.prd.credorax.com)
+    )
+  )
+
+###################################################################################
+##############################$## WAY4 DEV3 #######################################
+###################################################################################
+
+w4bo1dev3 =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbbo01.dev3.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA = (UR=A)
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo1dev.prd.credorax.com)
+    )
+  )
+w4bo1dev3stb =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbbo02.dev3.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = w4bo1stb)
+    )
+  )
+w4on1dev3 =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbon01.dev3.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4on1fra.prd.credorax.com)
+    )
+  )
+w4on2dev3 =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbon02.dev3.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4on1bos.prd.credorax.com)
+    )
+  )
+
+
+
+###################################################################################
+##############################$## WAY4_Dockcers #######################################
+###################################################################################
+WAY4_Docker1 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15201))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+WAY4_Docker2 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15202))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+WAY4_Docker3 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15203))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+WAY4_Docker4 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15204))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+WAY4_Docker5 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15205))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+
+RND_Docker =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin01.dev1.bos.credorax.com)(PORT = 1532))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+
+WAY4_Docker6 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15206))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+
+WAY4_Docker7 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15207))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+
+WAY4_Docker8 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15208))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+
+WAY4_Docker9 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15209))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+
+WAY4_Docker10 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15210))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+
+WAY4_Docker11 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = tcp)(HOST = docker-lin02.dev1.bos.credorax.com)(PORT = 15211))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+        )
+    )
+WAY4_Docker13 =
+    (DESCRIPTION =
+    	(ADDRESS = (PROTOCOL = TCP)(HOST = docker-lin01.dev1.bos.credorax.com)(PORT = 15213))
+    	(CONNECT_DATA =
+            (SERVER = DEDICATED)
+	    (SERVICE_NAME = orclpdb1)
+    )
+)
+
+WAY4_Docker14 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = docker-lin01.dev1.bos.credorax.com)(PORT = 15214))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+    )
+)
+
+WAY4_Docker15 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = docker-lin01.dev1.bos.credorax.com)(PORT = 15215))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+    )
+)
+
+WAY4_Docker16 =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = docker-lin01.dev1.bos.credorax.com)(PORT = 15216))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orclpdb1)
+    )
+)
+
+
+###################################################################################
+################################# RND_databases #######################################
+###################################################################################
+
+stgrndm =
+
+  (DESCRIPTION =
+
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrndm-np-01.qa.bos.credorax.com)(PORT = 1521))
+
+    (CONNECT_DATA =
+
+      (SERVER = DEDICATED)
+
+      (SID = stgrndm)
+
+    )
+
+  )
+
+
+
+stgrnd_qa1 =
+
+  (DESCRIPTION =
+
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-01.qa.bos.credorax.com)(PORT = 1521))
+
+    (CONNECT_DATA =
+
+      (SERVER = DEDICATED)
+
+      (SID = stgdev)
+
+    )
+
+  )
+
+
+
+stgrnd_qa2 =
+
+  (DESCRIPTION =
+
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-02.qa.bos.credorax.com)(PORT = 1521))
+
+    (CONNECT_DATA =
+
+      (SERVER = DEDICATED)
+
+      (SID = stgdev)
+
+    )
+
+  )
+
+
+
+stgrnd_qa3 =
+
+  (DESCRIPTION =
+
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-03.qa.bos.credorax.com)(PORT = 1521))
+
+    (CONNECT_DATA =
+
+      (SERVER = DEDICATED)
+
+      (SID = stgdev)
+
+    )
+
+  )
+
+stgrnd_qa4 =
+
+  (DESCRIPTION =
+
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-04.qa.bos.credorax.com)(PORT = 1521))
+
+    (CONNECT_DATA =
+
+      (SERVER = DEDICATED)
+
+      (SID = stgdev)
+
+    )
+
+  )
+
+stgrnd_dev1 =
+
+  (DESCRIPTION =
+
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-01.dev.bos.credorax.com)(PORT = 1521))
+
+    (CONNECT_DATA =
+
+      (SERVER = DEDICATED)
+
+      (SID = stgdev)
+
+    )
+
+  )
+
+
+
+stgrnd_dev2 =
+
+  (DESCRIPTION =
+
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-02.dev.bos.credorax.com)(PORT = 1521))
+
+    (CONNECT_DATA =
+
+      (SERVER = DEDICATED)
+
+      (SID = stgdev)
+
+    )
+
+  )
+
+
+
+stgrnd_dev3 =
+
+  (DESCRIPTION =
+
+    (ADDRESS = (PROTOCOL = TCP)(HOST = stgrnd-np-03.dev.bos.credorax.com)(PORT = 1521))
+
+    (CONNECT_DATA =
+
+      (SERVER = DEDICATED)
+
+      (SID = stgdev)
+
+    )
+
+  )

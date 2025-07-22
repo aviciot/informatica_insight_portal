@@ -1,0 +1,58 @@
+DROP TABLE IF EXISTS informatica_connections_details;
+
+
+---This table hold all connections details used by informatica based
+--  SELECT b.CNX_SUBTYPE_NAME as connection_type,a.object_name as connection_name ,a.user_name,
+--a.COnnect_String as connection_string,
+--'' as database_name ,
+--	'' as host_name ,
+--	''  as port_number ,
+--	'' service_name ,
+--	SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+--    SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+--    TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_DATE,'' as UPDATED_DATE
+--FROM OPB_CNX A INNER JOIN
+-- OPB_MMD_CNX B ON A.OBJECT_TYPE=B.CNX_OBJECT_TYPE  AND A.OBJECT_SUBTYPE=B.CNX_OBJECT_SUBTYPE
+-- order by OBJECT_NAME;
+
+
+-- NPCI , Centos
+--SELECT b.CNX_SUBTYPE_NAME as connection_type,
+--a.object_name as connection_name ,a.user_name,
+--a.COnnect_String as connection_string,
+--'' as database_name ,
+--	'' as host_name ,
+--	''  as port_number ,
+--	'' service_name ,
+--SYS_CONTEXT('USERENV', 'DB_NAME') AS informatica_server,
+--    SYS_CONTEXT('USERENV', 'SESSION_USER') AS informatica_user,
+--    TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_DATE
+--FROM INFO_REP_PROD.OPB_CNX A INNER JOIN
+-- INFO_REP_PROD.OPB_MMD_CNX B ON A.OBJECT_TYPE=B.CNX_OBJECT_TYPE  AND A.OBJECT_SUBTYPE=B.CNX_OBJECT_SUBTYPE
+-- order by OBJECT_NAME;
+
+CREATE TABLE INFORMATICA_CONNECTIONS_DETAILS (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+	CONNECTION_TYPE VARCHAR2,
+	CONNECTION_NAME VARCHAR2,
+	USER_NAME VARCHAR2,
+	CONNECTION_STRING VARCHAR2,
+	DATABASE_NAME VARCHAR2,
+	HOST_NAME VARCHAR2,
+	PORT_NUMBER NUMBER,
+	SERVICE_NAME VARCHAR2,
+	INFORMATICA_SERVER VARCHAR,
+	INFORMATICA_USER VARCHAR,
+	CREATED_DATE DATE,
+    UPDATED_DATE DATE
+);
+
+
+--- delete duplciates
+--
+--DELETE FROM INFORMATICA_SESSIONS_CONNECTIONS
+--WHERE ROWID NOT IN (
+--    SELECT MIN(ROWID)
+--    FROM INFORMATICA_SESSIONS_CONNECTIONS
+--    GROUP BY FOLDER, WORKFLOW_NAME, SESSION_NAME, CONN_TYPE, CONN_NAME, DIR_NAME, FILE_NAME, CMD_TASK_NAME, CMD_NAME, SCRIPT_TYPE, INFORMATICA_SERVER, INFORMATICA_USER, CREATED_DATE, UPDATED_DATE
+--);

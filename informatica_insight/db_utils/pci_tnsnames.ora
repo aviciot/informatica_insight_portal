@@ -1,0 +1,91 @@
+ER02=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = er02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SID = w4bo1bos))
+    )
+w4bo2bos=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST =dbbo-pc-02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo2bos.prd.credorax.com)
+    )
+  )
+w4bo2stb=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST =dbbo-pc-02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo2bos.prd.credorax.com)
+    )
+  )
+w4bo2tmp=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST =dbbo-pc-02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = w4bo2bos.prd.credorax.com)
+    )
+  )
+STGPROD_ORIG=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = stgprod.prd.credorax.com)
+    (SID = STGPROD))
+    )
+STGPROD =
+   (DESCRIPTION=
+    (ADDRESS=(PROTOCOL=TCP) (HOST= bidb02.prod.bos.credorax.com) (PORT=1521))
+          (CONNECT_DATA=
+        (SERVICE_NAME=stg_prm.prd.credorax.com)
+       )
+)
+
+dwhprod =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521)))(CONNECT_DATA =(SID = stgprod)))
+odsprod =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521)))(CONNECT_DATA =(SID = odsprod)))
+infoprod =(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = bidb02.prod.bos.credorax.com)(PORT = 1521)))(CONNECT_DATA =(SID = infoprod)))
+
+STGQA1=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = bidb01.qa1.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SID = stgqa1)
+    )
+    )
+w4dm1bos=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbbo-pc-02.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SERVER = DEDICATED)
+    (SERVICE_NAME = w4dm1bos.prd.credorax.com)
+    )
+    )
+w4bo1bos =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = dbbo01.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SID = w4bo1bos)
+    )
+    )
+BIDB=
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = bizops01.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+    (SID = bidb))
+    )
+w4bo_snap =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = tcp)(HOST = trexarcdb03.prod.bos.credorax.com)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      #(SERVICE_NAME = w4bo1bos.prd.credorax.com)
+      (SID = w4bo1bos)
+    )
+    )
+
+

@@ -127,13 +127,13 @@ Visual representation of workflow structure:
 
 ---
 
-## 🗃️ Database & Table Related Processes
+## 🗃️ Database & Tables usage insight
 
-### 🔎 Related by Host / Connection  
+### 🔎 Find proccesses by Host / Connection  
 Find all processes interacting with a specific database or connection.  
 <img width="659" height="785" alt="DB Related Processes" src="https://github.com/user-attachments/assets/49fdbc54-8aa2-4eaf-be99-289cf5111711" />
 
-### 📌 Related by Table Name  
+### 📌 Find processess by Table Name  
 Search workflows by referenced table name (source/target/attribute match).  
 <img width="1441" height="641" alt="Table Related Processes" src="https://github.com/user-attachments/assets/7e5f2353-9f70-487c-98bc-24694816488a" />
 

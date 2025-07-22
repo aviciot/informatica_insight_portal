@@ -122,7 +122,7 @@ Visual representation of workflow structure:
 *Workflows → Sessions → Commands → Connections → Related Tables*  
 <img width="747" height="459" alt="Workflow JSON View" src="https://github.com/user-attachments/assets/8b11b2e7-1ea9-4ee9-b57d-f681ad462e4a" />
 
-Commands.
+*DB details and commands(if any)
 <img width="703" height="655" alt="image" src="https://github.com/user-attachments/assets/4f9023eb-1c77-4770-bdab-5e60ef84f720" />
 
 ---

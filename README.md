@@ -12,7 +12,8 @@ It allows users to:
 
 In addition to metadata exploration,
 the portal provides advanced capabilities to **analyze and visualize Informatica performance statistics** at various levels — from full workflows to individual sessions.  
-helping teams identify inefficiencies, performance bottlenecks, and execution anomalies.
+helping teams identify inefficiencies, performance bottlenecks, and execution anomalies (baed ML scikit)
+)
 
 To ensure optimal performance and responsiveness,
 the application fetch once once the data from PROD DB and caches all relevant metadata and execution data in a local database .  

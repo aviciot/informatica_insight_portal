@@ -13,7 +13,6 @@ import bcrypt
 from pathlib import Path
 
 from styles.app_ultis import load_custom_css
-from qa_dir.qa_page import display_qa_page
 from home_page import display_home_page
 from informatica_insight.informatica_insight_page import display_informatica_insight_page
 from config.config import Config
@@ -181,9 +180,6 @@ if config.get("dev_mode"):
 PAGES = {
     "Home": display_home_page,
     "DEV: Informatica Insights": display_informatica_insight_page,
-    # "DEV: Test": display_test,
-    "QA: Compare 2 Files": lambda: display_qa_page("compare_2_files"),
-    "QA: Compare Bulk": lambda: display_qa_page("compare_bulk"),
     "Admin": display_admin_page,
     # "CronTab Management": display_crontab_manager,
 }
@@ -238,13 +234,6 @@ with st.sidebar:
             #     st.session_state["current_page"] = "DEV: Test"
             #     st.rerun()
 
-    with st.expander("🔍 QA Section", expanded=False):
-        if st.button("Compare 2 Files", key="nav_compare_2_files"):
-            st.session_state["current_page"] = "QA: Compare 2 Files"
-            st.rerun()
-        if st.button("Compare Bulk", key="nav_compare_bulk"):
-            st.session_state["current_page"] = "QA: Compare Bulk"
-            st.rerun()
 
     if has_permission("admin"):
         st.markdown("### ")

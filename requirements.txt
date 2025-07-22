@@ -160,3 +160,4 @@ Werkzeug
 xyzservices
 zipp
 oracledb
+scikit-learn

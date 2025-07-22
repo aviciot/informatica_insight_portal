@@ -2,10 +2,21 @@
 
 ## 🧭 Overview
 
-The **Informatica Insights Portal** is a web-based dashboard built with Python (WebUI) that provides a clear and organized view of Informatica metadata.  
-It helps users explore workflows, sessions, command tasks, and database connections in a user-friendly interface.
 
-It pulls data using predefined **read-only queries** from the Informatica repository and uses an internal SQLite or PostgreSQL database for caching and analysis.
+The **Informatica Insights Portal** is a web-based dashboard built with **Python and Streamlit**, designed to provide a clear and organized view of Informatica metadata.
+
+It allows users to:
+- Explore folders, workflows, sessions, command tasks, and database connections
+- Navigate metadata with an intuitive and interactive interface
+- Analyze relationships and dependencies across Informatica components
+
+In addition to metadata exploration,
+the portal provides advanced capabilities to **analyze and visualize Informatica performance statistics** at various levels — from full workflows to individual sessions.  
+helping teams identify inefficiencies, performance bottlenecks, and execution anomalies.
+
+To ensure optimal performance and responsiveness,
+the application fetch once once the data from PROD DB and caches all relevant metadata and execution data in a local database .  
+This reduces the load on production Informatica environments and allows the portal to run independently with fast access to large-scale datasets.
 
 > This portal is useful for developers, analysts, and admins looking to trace process dependencies, identify issues, and gain operational insights into Informatica workflows.
 

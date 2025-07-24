@@ -13,9 +13,9 @@ insight_db:
 
   postgres:
     dbname: informatica_insight
-    user: info_connect
-    password: Padov80
-    host: dwh02.dev1.bos.credorax.com
+    user: user1
+    password: YourPass
+    host: dev1.bos.dummy.com
     port: 5432
 
   ddl:
@@ -382,6 +382,13 @@ informatica_db:
     port: 1521
     service_name: infoprod.prd.credorax.com
 
+
+  prod1:
+    user: infoprod_rep_pci
+    password: infoprod_rep_pci99
+    host: bidb02.prod.bos.credorax.com
+    port: 1521
+    service_name: infoprod.prd.credorax.com
 
   #non_pci:
    # user: infra_rep_ds_dev01

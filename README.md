@@ -1,27 +1,27 @@
-# Informatica Insights Portal
+# 📊 Informatica Insights Portal
 
 ## 🧭 Overview
 
+The **Informatica Insights Portal** is a lightweight web dashboard that provides a clear view of Informatica metadata and performance statistics.
 
-The **Informatica Insights Portal** is a web-based dashboard , designed to provide a clear and organized view of Informatica metadata.
+### 🔍 Key Features
 
-It allows users to:
-- Explore folders, workflows, sessions, command tasks, and database connections
-- Navigate metadata with an intuitive and interactive interface
-- Analyze relationships and dependencies across Informatica components
+- Browse folders, workflows, sessions, and DB connections
+- Visualize dependencies between Informatica components
+- Analyze performance of workflows and sessions (with ML-based insights)
+- Identify bottlenecks and anomalies in execution
+- Fast, low-impact access 
 
-In addition to metadata exploration,
-the portal provides advanced capabilities to **analyze and visualize Informatica performance statistics** at various levels — from full workflows to individual sessions.  
-helping teams identify inefficiencies, performance bottlenecks, and execution anomalies (baed ML scikit)
+The portal pulls metadata and execution stats once from the production database and caches them locally, minimizing impact on the production Informatica environment.
 
-To ensure optimal performance and responsiveness,
-the application fetch once once the data from PROD DB and caches all relevant metadata and execution data in a local database .  
-This reduces the load on production Informatica environments and allows the portal to run independently with fast access to large-scale datasets.
+> Built for developers, analysts, and admins who need visibility into Informatica processes and performance.
+
+---
 
 
-> This portal is useful for developers, analysts, and admins looking to trace process dependencies, identify issues, and gain operational insights into Informatica workflows.
+## 📘 Documentation
 
-📘 **Documentation** available at:  
+Full documentation available at:  
 👉 [https://aviciot.github.io/informatica_insight_portal/](https://aviciot.github.io/informatica_insight_portal/)
 
 ---
@@ -137,6 +137,14 @@ Search workflows by referenced table name (source/target/attribute match).
 <img width="1441" height="641" alt="Table Related Processes" src="https://github.com/user-attachments/assets/7e5f2353-9f70-487c-98bc-24694816488a" />
 
 
+### 🗃️ Manage Insight Data Sources  
+Connect to Informatica metadata via DB connection or `tnsnames.ora`/`odbc.ini`.  
+<img width="885" height="850" alt="Insight DB Sources" src="https://github.com/user-attachments/assets/76ffbc2b-6308-41b9-add4-d6fd9bfeec5d" />
+
+### 📂 View Insight Internal Tables  
+Explore the structure of the internal SQLite/PostgreSQL Insight DB.  
+<img width="1063" height="867" alt="Insight DB Tables" src="https://github.com/user-attachments/assets/ec17b193-2d2c-40ae-ba0d-be782a77290f" />
+
 ---
 
 ## 📈 Performance Analytics
@@ -207,13 +215,6 @@ YAML-based config editor and internal database tools.
 Edit `config.yaml` directly from the UI.  
 <img width="407" height="628" alt="Live Config Editor" src="https://github.com/user-attachments/assets/4a36bef4-9dbd-4404-800d-d1f948e8767a" />
 
-### 🗃️ Manage Insight Data Sources  
-Connect to Informatica metadata via DB connection or `tnsnames.ora`/`odbc.ini`.  
-<img width="885" height="850" alt="Insight DB Sources" src="https://github.com/user-attachments/assets/76ffbc2b-6308-41b9-add4-d6fd9bfeec5d" />
-
-### 📂 View Insight Internal Tables  
-Explore the structure of the internal SQLite/PostgreSQL Insight DB.  
-<img width="1063" height="867" alt="Insight DB Tables" src="https://github.com/user-attachments/assets/ec17b193-2d2c-40ae-ba0d-be782a77290f" />
 
 ---
 
